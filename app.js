@@ -79,7 +79,7 @@
   }
 
   // Only keeps files that actually have a path, so a half-filled entry in
-  // data.js degrades to "coming soon" instead of a broken link.
+  // data.js degrades to a non-clickable card instead of a broken link.
   function usableFiles(item) {
     if (!item || !Array.isArray(item.files)) return [];
     return item.files.filter(function (file) {
@@ -93,7 +93,8 @@
    * Builds one clickable card.
    * @param {Object} item     entry from SITE.projects or SITE.documents
    * @param {number} index    0-based, used for the 01 / 02 counter
-   * @param {Object} options  { compact: true } hides the counter, context and tags
+   * @param {Object} options  { compact: true } hides the counter. Context and
+   *                          tags show whenever the entry defines them.
    */
   function buildCard(item, index, options) {
     var opts = options || {};
@@ -105,13 +106,11 @@
       class: "card" + (openable ? " is-openable" : " is-pending")
     });
 
-    /* top row: counter + status chip */
-    var status = h("span", {
-      class: "card-status" + (openable ? "" : " is-pending")
-    }, [
-      openable ? icon("arrow") : null,
-      openable ? t(pick("ui.card.openHint")) : t(pick("ui.card.comingSoon"))
-    ]);
+    /* top row: counter + status chip (only when there is a file to open) */
+    var status = openable ? h("span", { class: "card-status" }, [
+      icon("arrow"),
+      t(pick("ui.card.openHint"))
+    ]) : null;
 
     card.appendChild(h("div", { class: "card-top" }, [
       opts.compact ? h("span", { class: "card-num" }) :
@@ -133,8 +132,8 @@
     }
     card.appendChild(title);
 
-    /* context line (projects only) */
-    if (!opts.compact && item.context) {
+    /* context line (projects, and documents that define one) */
+    if (item.context) {
       card.appendChild(h("p", { class: "card-context", text: t(item.context) }));
     }
 
@@ -144,15 +143,15 @@
     }
 
     /* tool tags */
-    if (!opts.compact && Array.isArray(item.tags) && item.tags.length) {
+    if (Array.isArray(item.tags) && item.tags.length) {
       card.appendChild(h("ul", { class: "tags" }, item.tags.map(function (tag) {
         return h("li", { class: "tag", text: tag });
       })));
     }
 
     /* file links — one small labeled link per file */
-    var fileRow = h("div", { class: "card-files" });
     if (openable) {
+      var fileRow = h("div", { class: "card-files" });
       files.forEach(function (file) {
         fileRow.appendChild(h("a", {
           class: "file-link",
@@ -161,13 +160,8 @@
           rel: "noopener"
         }, [icon("file"), t(file.label) || "PDF"]));
       });
-    } else {
-      fileRow.appendChild(h("span", {
-        class: "file-link is-disabled",
-        "aria-disabled": "true"
-      }, [icon("file"), t(pick("ui.card.comingSoon"))]));
+      card.appendChild(fileRow);
     }
-    card.appendChild(fileRow);
 
     /* clicking anywhere on the card opens the first file */
     if (openable) {
@@ -328,7 +322,7 @@
       description: t(intro),
       knowsLanguage: ["fr-CA", "en"],
       knowsAbout: (SITE.skills || []).reduce(function (all, group) {
-        return all.concat(group.items || []);
+        return all.concat((group.items || []).map(t));
       }, [])
     };
     if (siteUrl) data.url = siteUrl;
@@ -373,7 +367,7 @@
       grid.appendChild(h("div", { class: "skill-group" }, [
         h("h3", { text: t(group.group) }),
         h("ul", { class: "skill-list" }, (group.items || []).map(function (item) {
-          return h("li", { text: item });
+          return h("li", { text: t(item) });
         }))
       ]));
     });

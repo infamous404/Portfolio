@@ -42,7 +42,7 @@
        in a new browser tab (it views inline, it does not download).
      * Every file also gets its own small labeled link on the card
        ("Report", "Diagram", "Slides"...).
-     * `files: []`  (empty array) -> the card renders as "Coming soon"
+     * `files: []`  (empty array) -> the card renders without file links
        and is not clickable. Nothing breaks.
      * Paths are RELATIVE to index.html. Always use forward slashes.
        Good:  "assets/reports/splunk-lab.pdf"
@@ -57,7 +57,6 @@
      [x] assets/reports/  -> every PDF is now a real deliverable, no placeholders
      [ ] projects         -> card write-ups are still the generated drafts;
                              the PDFs behind them are real
-     [ ] documents        -> Résumé / CV still has files: [] ("coming soon")
      [ ] certifications   -> optional: paste each "Show credential" URL
    ========================================================================== */
 
@@ -78,7 +77,7 @@ const SITE = {
     // Confirmed correct, capital P included — GitHub Pages URLs are
     // case-sensitive and the repository is named "Portfolio".
     // If you ever rename the repo, update this AND the og: tags in index.html.
-    siteUrl: "https://g0at2002.github.io/Portfolio/",
+    siteUrl: "https://infamous404.github.io/Portfolio/",
   },
 
 
@@ -124,7 +123,7 @@ const SITE = {
       {
         icon: "github",
         text: "GitHub",
-        href: "https://github.com/g0at2002",
+        href: "https://github.com/infamous404",
       },
     ],
   },
@@ -191,8 +190,8 @@ const SITE = {
       {
         label: { en: "Certification", fr: "Certification" },
         value: {
-          en: "CompTIA Security+ — expected Aug 2026 · 10+ certifications completed",
-          fr: "CompTIA Security+ — prévu août 2026 · plus de 10 certifications complétées",
+          en: "CompTIA Security+ — in progress · 10+ certificates and courses",
+          fr: "CompTIA Security+ — en cours · 10+ certificats et cours",
         },
       },
       {
@@ -219,8 +218,8 @@ const SITE = {
       {
         label: { en: "Target roles", fr: "Postes visés" },
         value: {
-          en: "SOC Analyst (Tier 1), Blue Team, Security Operations",
-          fr: "Analyste SOC (niveau 1), équipe bleue, opérations de sécurité",
+          en: "SOC Analyst (Tier 1), Blue Team, Security Operations, IT Support / Help Desk",
+          fr: "Analyste SOC (niveau 1), équipe bleue, opérations de sécurité, soutien TI / service d'assistance",
         },
       },
       {
@@ -250,7 +249,7 @@ const SITE = {
          ],
        },
 
-     Set `files: []` if the document is not ready yet -> card shows "Coming soon".
+     Set `files: []` if the document is not ready yet -> card is not clickable.
      ====================================================================== */
   projects: [
 
@@ -314,6 +313,26 @@ const SITE = {
       ],
     },
 
+    /* ---- PROJECT 04 ------------------------------------------------- */
+    {
+      title: {
+        en: "OWASP Juice Shop — Web Application Penetration Test",
+        fr: "OWASP Juice Shop — Test d'intrusion d'une application Web",
+      },
+      context: {
+        en: "Coursework — black-box assessment (Intrusion Testing 420-B06-VA)",
+        fr: "Travail de cours — évaluation en boîte noire (Tests d'intrusion 420-B06-VA)",
+      },
+      summary: {
+        en: "Manual black-box assessment of a deliberately vulnerable web app: 12 findings (2 Critical, 5 High, 4 Medium, 1 Low) mapped to the OWASP Top 10, including SQL injection authentication bypass, IDOR, DOM XSS and JWT/session weaknesses, with a prioritized remediation plan.",
+        fr: "Évaluation manuelle en boîte noire d'une application Web volontairement vulnérable : 12 constats (2 critiques, 5 élevés, 4 moyens, 1 faible) associés au OWASP Top 10, dont un contournement d'authentification par injection SQL, des IDOR, du XSS basé sur le DOM et des faiblesses liées aux JWT et aux sessions, avec un plan de remédiation priorisé.",
+      },
+      tags: ["Burp Suite", "OWASP Top 10", "SQL Injection", "XSS", "JWT", "Broken Access Control"],
+      files: [
+        { label: { en: "Report", fr: "Rapport" }, path: "assets/reports/Juice_Shop_Security_Assessment_Marco.pdf" },
+      ],
+    },
+
     /* ---- COPY THE BLOCK ABOVE TO ADD A NEW PROJECT ------------------ */
 
   ],
@@ -324,9 +343,69 @@ const SITE = {
      ----------------------------------------------------------------------
      Standalone PDFs that are not full projects: write-ups, TryHackMe notes,
      cheat sheets, a résumé. Same shape as a project but lighter.
-     Set `files: []` to show a "Coming soon" chip instead of a link.
+     Set `files: []` to show a card with no file links.
      ====================================================================== */
   documents: [
+    {
+      title: {
+        en: "Vulnerability Management Report — GlobalTech (fictional client)",
+        fr: "Rapport de gestion des vulnérabilités — GlobalTech (client fictif)",
+      },
+      context: { en: "Coursework", fr: "Travail de cours" },
+      summary: {
+        en: "Risk-based analysis of 10 simulated vulnerabilities across network, host, web, API, cloud and container assets; top-5 prioritization beyond CVSS (exposure, impact, likelihood) and a phased remediation roadmap.",
+        fr: "Analyse fondée sur le risque de 10 vulnérabilités simulées touchant des actifs réseau, hôtes, Web, API, infonuagiques et conteneurisés; priorisation des 5 principales au-delà du CVSS (exposition, impact, probabilité) et feuille de route de remédiation par phases.",
+      },
+      tags: ["Vulnerability Management", "CVSS", "Risk Prioritization", "Remediation Roadmap"],
+      files: [
+        { label: { en: "Report", fr: "Rapport" }, path: "assets/reports/Assignment_Three_Vulnerability_Management_Report_Marco_Helie.pdf" },
+      ],
+    },
+    {
+      title: {
+        en: "Web Server Security Assessment — OWASP Mutillidae II",
+        fr: "Évaluation de la sécurité d'un serveur Web — OWASP Mutillidae II",
+      },
+      context: { en: "Coursework", fr: "Travail de cours" },
+      summary: {
+        en: "Reconnaissance, information disclosure and misconfiguration findings (exposed robots.txt, directory listing, phpMyAdmin, verbose errors), a directory traversal proof of concept, a six-stage patch management plan and a prioritized hardening plan.",
+        fr: "Reconnaissance, divulgation d'information et constats de mauvaise configuration (robots.txt exposé, listage des répertoires, phpMyAdmin, messages d'erreur détaillés), preuve de concept de traversée de répertoires, plan de gestion des correctifs en six étapes et plan de durcissement priorisé.",
+      },
+      tags: ["Mutillidae II", "Directory Traversal", "Misconfiguration", "Patch Management", "Hardening"],
+      files: [
+        { label: { en: "Report", fr: "Rapport" }, path: "assets/reports/Web_Server_Marco_Helie.pdf" },
+      ],
+    },
+    {
+      title: {
+        en: "Penetration Test Engagement — Nexus Plaza (fictional client)",
+        fr: "Mandat de test d'intrusion — Nexus Plaza (client fictif)",
+      },
+      context: { en: "Coursework", fr: "Travail de cours" },
+      summary: {
+        en: "Full engagement lifecycle: scope worksheet, rules of engagement, services agreement, hands-on exploitation of four lab targets (SQL injection, directory listing, anonymous SMB, exposed credentials) and a professional report with risk ratings and remediation.",
+        fr: "Cycle de vie complet du mandat : fiche de cadrage, règles d'engagement, entente de services, exploitation pratique de quatre cibles de laboratoire (injection SQL, listage des répertoires, SMB anonyme, identifiants exposés) et rapport professionnel avec cotes de risque et remédiation.",
+      },
+      tags: ["Penetration Testing", "Rules of Engagement", "SQL Injection", "SMB", "Reporting"],
+      files: [
+        { label: { en: "Report", fr: "Rapport" }, path: "assets/reports/Final_LIA_Project.pdf" },
+      ],
+    },
+    {
+      title: {
+        en: "Malware Case Study — Pegasus Spyware (NSO Group)",
+        fr: "Étude de cas de maliciel — logiciel espion Pegasus (NSO Group)",
+      },
+      context: { en: "Coursework", fr: "Travail de cours" },
+      summary: {
+        en: "Threat-intelligence style analysis: infection chain, architecture, IOCs, MITRE ATT&CK Mobile mapping (S0289), exploited CVEs (FORCEDENTRY, BLASTPASS) and preventive, detective and corrective controls.",
+        fr: "Analyse de type renseignement sur les menaces : chaîne d'infection, architecture, indicateurs de compromission (IOC), correspondance avec MITRE ATT&CK Mobile (S0289), CVE exploitées (FORCEDENTRY, BLASTPASS) et contrôles préventifs, de détection et correctifs.",
+      },
+      tags: ["Pegasus", "MITRE ATT&CK", "Threat Intelligence", "IOCs", "CVE Analysis"],
+      files: [
+        { label: { en: "Report", fr: "Rapport" }, path: "assets/reports/Pegasus_Spyware_Case_Study_Marco_Helie.pdf" },
+      ],
+    },
     {
       title: {
         en: "Corporate Office Network Security",
@@ -419,15 +498,6 @@ const SITE = {
         { label: { en: "Report", fr: "Rapport" }, path: "assets/reports/doc-iot-threat-actor-analysis.pdf" },
       ],
     },
-    {
-      // EXAMPLE of the "coming soon" state: empty `files` array.
-      title: { en: "Résumé / CV", fr: "Curriculum vitæ" },
-      summary: {
-        en: "Available on request — a PDF version will be posted here.",
-        fr: "Disponible sur demande — une version PDF sera publiée ici.",
-      },
-      files: [],
-    },
   ],
 
 
@@ -476,8 +546,9 @@ const SITE = {
   /* ======================================================================
      6. SKILLS / TOOLS
      ----------------------------------------------------------------------
-     Add a group by copying a { group, items } block. Item names are not
-     translated (tool names are the same in both languages).
+     Add a group by copying a { group, items } block. Each item is either a
+     plain string (tool and standard names are the same in both languages) or,
+     for descriptive wording that should be translated, { en: "", fr: "" }.
      ====================================================================== */
   skills: [
     {
@@ -485,9 +556,14 @@ const SITE = {
       items: [
         "SIEM", "Splunk", "SPL", "Security Operations Center (SOC)",
         "Threat Detection", "Event Monitoring", "Log Analysis & Monitoring",
-        "Managed Detection and Response (MDR)", "MITRE ATT&CK",
-        "Threat & Vulnerability Management",
+        "MITRE ATT&CK", "Threat & Vulnerability Management",
         "Intrusion Detection & Prevention", "Network Monitoring",
+        "Wazuh",
+        { en: "Microsoft Sentinel (KQL fundamentals)", fr: "Microsoft Sentinel (notions de base de KQL)" },
+        "Microsoft Defender for Endpoint",
+        { en: "Windows Event Logs", fr: "Journaux d'événements Windows" },
+        { en: "Detection Engineering", fr: "Ingénierie de la détection" },
+        { en: "Alert Triage", fr: "Triage des alertes" },
       ],
     },
     {
@@ -495,15 +571,15 @@ const SITE = {
       items: [
         "Incident Response", "Incident Response Playbook Development",
         "Containment, Eradication & Recovery", "Digital Forensics (DFIR)",
-        "Malware Analysis", "Volatility", "Analytical Skills",
+        "Malware Analysis", "Volatility",
       ],
     },
     {
       group: { en: "Network & Infrastructure", fr: "Réseau et infrastructure" },
       items: [
-        "Network Security", "Network Architecture", "TCP/IP", "Packet Capture",
+        "Network Security", "TCP/IP", "Packet Capture",
         "Firewall Rules", "pfSense", "VLAN Segmentation", "VPN",
-        "Encryption", "TLS/SSL Hardening", "SSH Hardening", "WireGuard",
+        "TLS/SSL Hardening", "SSH Hardening", "WireGuard",
         "DNSSEC", "Wireshark", "Galera / MariaDB", "Kafka",
       ],
     },
@@ -513,6 +589,11 @@ const SITE = {
         "Identity & Access Management (IAM)", "Keycloak", "PAM", "RBAC",
         "Risk Assessment", "NIST CSF", "ISO 27001", "PCI DSS",
         "Regulatory Compliance",
+        { en: "PIPEDA", fr: "LPRPDE" },
+        {
+          en: "Canadian Centre for Cyber Security baseline",
+          fr: "Directives de base du Centre canadien pour la cybersécurité",
+        },
       ],
     },
     {
@@ -520,6 +601,18 @@ const SITE = {
       items: [
         "Linux", "Kali Linux", "SELinux", "System Administration",
         "AWS (EC2, Route 53, IAM, KMS)",
+        "Docker", "VirtualBox",
+      ],
+    },
+    {
+      group: { en: "Windows & IT Support", fr: "Windows et soutien TI" },
+      items: [
+        { en: "Windows administration", fr: "Administration Windows" },
+        "Microsoft 365", "Active Directory",
+        { en: "Group Policy", fr: "Stratégies de groupe" },
+        "DNS/DHCP", "PowerShell",
+        { en: "Troubleshooting", fr: "Dépannage" },
+        "ServiceNow", "Jira Service Management",
       ],
     },
     {
@@ -530,10 +623,25 @@ const SITE = {
       ],
     },
     {
-      group: { en: "Analysis & Communication", fr: "Analyse et communication" },
+      group: { en: "Vulnerability & Web Security", fr: "Vulnérabilités et sécurité web" },
       items: [
-        "Vulnerability Assessment", "Technical Documentation",
-        "Executive-level Communication",
+        "Tenable Nessus", "CVSS", "Burp Suite", "DIRB", "smbclient",
+        "OWASP Top 10", "OWASP WSTG", "PTES", "NIST SP 800-115",
+        {
+          en: "SQL injection / XSS / IDOR / JWT testing",
+          fr: "Tests d'injection SQL / XSS / IDOR / JWT",
+        },
+      ],
+    },
+    {
+      group: { en: "Reporting & Communication", fr: "Rapports et communication" },
+      items: [
+        "Vulnerability Assessment",
+        { en: "Technical Documentation", fr: "Documentation technique" },
+        { en: "Pentest reporting", fr: "Rapports de tests d'intrusion" },
+        { en: "Scoping & rules of engagement", fr: "Cadrage et règles d'engagement" },
+        { en: "Risk-based prioritization", fr: "Priorisation fondée sur le risque" },
+        { en: "Remediation planning", fr: "Planification de la remédiation" },
       ],
     },
     {
@@ -567,7 +675,7 @@ const SITE = {
       // TODO: paste the issuer's "Show credential" URL into `url`.
       name: "CompTIA Security+",
       issuer: "CompTIA",
-      date: { en: "Expected Aug 2026", fr: "Prévu août 2026" },
+      date: { en: "In progress", fr: "En cours" },
       url: "",
       inProgress: true,
     },
@@ -673,7 +781,6 @@ const SITE = {
       },
     },
     card: {
-      comingSoon: { en: "Coming soon", fr: "Bientôt disponible" },
       openHint: { en: "Open", fr: "Ouvrir" },
       filesLabel: { en: "Files", fr: "Fichiers" },
     },

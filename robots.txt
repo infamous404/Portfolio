@@ -1,0 +1,20 @@
+# Keep this site out of search engines.
+#
+# IMPORTANT — this file is inert at this location. Crawlers only read
+# robots.txt from the DOMAIN root (https://infamous404.github.io/robots.txt),
+# never from a subpath like /Portfolio/robots.txt. This repo is a GitHub Pages
+# *project* site, so it cannot serve the domain root.
+#
+# The rule that actually keeps this page out of Google is the
+# <meta name="robots" content="noindex, nofollow"> tag in index.html.
+#
+# Do NOT try to "fix" this by putting these rules at the domain root (a repo
+# named infamous404.github.io). Doing so would block LinkedIn, Twitter and
+# Facebook crawlers too, which would break the social share preview — and it
+# would also stop Google from ever reading the noindex tag above.
+#
+# This file is kept for defence in depth and in case the site later moves to
+# its own domain, where it would take effect.
+
+User-agent: *
+Disallow: /

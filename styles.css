@@ -497,7 +497,6 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   color: var(--accent);
 }
 .card-status svg { width: 12px; height: 12px; }
-.card-status.is-pending { color: var(--dim); }
 
 .card-title { margin: 0; font: 600 17px/1.35 var(--mono); letter-spacing: -0.005em; }
 .card-title a { color: #f0f6f7; }
@@ -559,29 +558,25 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .file-link svg { width: 13px; height: 13px; flex: none; opacity: 0.8; }
 
-.file-link.is-disabled {
-  border-style: dashed;
-  color: var(--dim);
-  background: none;
-  cursor: not-allowed;
-}
 .card.is-pending { opacity: 0.78; }
 
 /* ---------- 7. Skills ---------------------------------------------- */
+/* One row per group: label on the left, tags on the right. Each row is only
+   as tall as its own tags, so a short group never sits in a padded-out card. */
 .skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
   margin-top: 22px;
+  border-top: 1px solid var(--line);
 }
 .skill-group {
-  padding: 18px 18px 16px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 6px 24px;
+  align-items: start;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--line);
 }
 .skill-group h3 {
-  margin: 0 0 12px;
+  margin: 7px 0 0;
   font: 600 11.5px/1 var(--mono);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -835,6 +830,8 @@ body.is-glitching .lang-toggle { animation: glitch-kick 0.32s steps(2) 1; }
 /* ---------- 9. Responsive ------------------------------------------ */
 @media (max-width: 860px) {
   .about-grid { grid-template-columns: 1fr; }
+  .skill-group { grid-template-columns: 1fr; }
+  .skill-group h3 { margin-top: 0; }
   .header-inner { flex-direction: column; flex-wrap: wrap; align-items: flex-start; gap: 22px; }
   .header-side { align-items: flex-start; width: 100%; }
   .contacts { justify-content: flex-start; }
